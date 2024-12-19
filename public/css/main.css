@@ -1,0 +1,189 @@
+:root {
+  --color-theme: #5c3d2b;
+  --color-bg: #FFFFFF;
+  --icon-opacity: 0.7;
+  --color-overlay: rgba(0,0,0,0.1);
+  --border-radius: 6px;
+  --color-border: #dee2e6;
+  --color-text: #777777;
+  --font-size-heading: calc(1.125rem * 0.8);
+  --font-size-text: calc(0.875rem * 0.8);
+  --color-bg-footer: #efefef;
+  --color-button-text: #FFFFFF;
+  --color-disable-button-text: #FFFFFF;
+  --color-disable-button-bg: #777777;
+  --color-price-after-sale: #CC0033;
+  --color-price-before-sale: #999999;
+  --color-secondary-bg: #FBF6ED;
+  --out-of-stock-button: #CCCCCC;
+  --color-error: red;
+  --color-input-disabled: #f7f7fa;
+  --color-success: #008000;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font-size-heading: 1.125rem;
+    --font-size-text: 0.875rem;
+  }
+}
+
+.status-wait {
+  color: #FF6600;
+}
+.status-shipping {
+  color: #8B4513;
+}
+.status-complete {
+  color: var(--color-success);
+}
+.status-cancel {
+  color: var(--color-error);
+}
+
+body, input {
+  color: var(--color-text) !important;
+  font-size: var(--font-size-text) !important;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--color-bg);
+  position: relative;
+  font-weight: 400px;
+}
+.normal-width-input, .width-small {
+	width: 100%;
+}
+.required::after {
+  content: " *";
+  color: var(--color-error);
+}
+.input-message-error {
+  color: var(--color-error);
+  font-size: calc(var(--font-size-text) * 0.8);
+  opacity: 0;
+}
+.input-message-error.show {
+  opacity: 1;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.text-link {
+  color: var(--color-theme);
+  width: fit-content;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.heading-small {
+  font-size: calc(var(--font-size-heading) * 0.8);
+  font-weight: bold;
+  transition: all 0.3s;
+}
+.heading {
+  font-size: var(--font-size-heading);
+  font-weight: bold;
+  transition: all 0.3s;
+}
+.rs-picker-toggle-wrapper {
+  width: 100% !important;
+  border-radius: 0px !important;
+  --rs-listbox-option-selected-text: var(--color-theme);
+  --rs-listbox-option-selected-bg: var(--color-secondary-bg);
+  --rs-state-focus-shadow: var(--color-bg);
+  --rs-input-focus-border: var(--color-border);
+  --rs-picker-value: var(--color-text);
+  --rs-text-secondary: var(--color-text);
+  --rs-input-disabled-bg: var(--color-input-disabled);
+}
+.input-disabled {
+  background-color: var(--color-input-disabled);
+}
+.rs-picker-toggle {
+  border-radius: 0px !important;
+}
+.rs-picker-popup {
+  --rs-listbox-option-selected-text: var(--color-theme);
+  --rs-listbox-option-selected-bg: var(--color-secondary-bg);
+  --rs-state-focus-shadow: var(--color-bg);
+  --rs-text-primary: var(--color-text);
+  --rs-listbox-option-hover-text: var(--color-theme);
+  --rs-listbox-option-hover-bg: var(--color-secondary-bg);
+  --rs-picker-value: var(--color-text);
+  --rs-text-secondary: var(--color-text);
+}
+.button {
+  background-color: var(--color-disable-button-bg);
+  color: var(--color-disable-button-text);
+  overflow: hidden;
+  padding: 10px;
+}
+.button.active {
+  background-color: var(--color-theme);
+  color: var(--color-button-text);
+}
+.button-content {
+  transition: transform 0.2s ease-in-out;
+}
+.button.active:hover {
+  opacity: 1;
+}
+.button:active .button-content {
+  transform: scale(0.95);
+}
+.right-0 {
+  right: 0;
+}
+.left-0 {
+  left: 0;
+}
+.top-0 {
+  top: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.w-fit {
+  width: fit-content;
+}
+
+@media (min-width: 768px) {
+  .normal-width-input, .width-small {
+		width: 768px;
+	}
+}
+
+@media (min-width: 992px) {
+  .text-link {
+    color: var(--color-text);
+    text-decoration: none !important;
+    position: relative;
+  }
+
+  .button {
+    opacity: var(--icon-opacity);
+  }
+  .button.active:hover {
+    opacity: 1;
+  }
+  
+  .text-link:hover {
+    color: var(--color-theme);
+  }
+  .text-link:after {
+    content: "";
+    position: absolute;
+    background: var(--color-theme);
+    bottom: 0px;
+    transition: all ease-in-out 0.3s;
+    width: 0;
+    height: 2px;
+    z-index: 1;
+    left: 0;
+  }
+  .text-link:hover.text-link:after {
+    width: 100%;
+  }
+}
