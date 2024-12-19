@@ -156,7 +156,7 @@ class Navbar extends Component {
                                             <span className="from">Ray   Munoz</span>
                                             <span className="time">1 day</span>
                                         </span>
-                                        <span classNameName="message">
+                                        <span className="message">
                                             Icon fonts are great.
                                     </span>
                                     </a>

@@ -1,56 +1,57 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../actions/user.action";
 import Login from "../components/login/login";
-import { loginForm, URL_BE } from "../constants/values";
+import { loginForm, URL_BE, inputStatus } from "../constants/values";
+
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notiLogin: ""
+      login: {
+        values: [],
+        checkValidate: [],
+        buttonStatus: false
+      },
     };
-  }
-  loginSubmit = async (email, password) => {
-    if (!this.isvalidEmail(email)) {
-      this.setState({ notiLogin: "Email invalid" });
-      return;
-    } else {
-      this.setState({ notiLogin: "" });
-    }
-    let res;
-    try {
-      res = await axios.post(`${URL_BE}admin/login`, {
-        email: email,
-        password: password
-      });
-    } catch (err) {
-      if (err.response !== undefined) {
-        if (err.response.data.msg === "no_registration_confirmation")
-          this.setState({ notiLogin: "The account has not been activated" });
-        else {
-          this.setState({ notiLogin: "Email or password invalid" });
+    loginForm.map((item) => {
+      if (item.inputKey) {
+        this.state.login.values[item.inputKey] = ''
+        if (item.isValidate) {
+          this.state.login.checkValidate[item.inputKey] = inputStatus.normal
         }
-      } else {
-        this.setState({ notiLogin: "Some thing went wrong" });
       }
-      return;
+    })
+  }
+  onChangeFieldLogin(inputKey, text, newInputStatus) {
+    const newLoginState = this.state.login;
+    newLoginState.values[inputKey] = text;
+    newLoginState.checkValidate[inputKey] = newInputStatus;
+    let checkButtonStatus = true
+    loginForm.map((item) => {
+      if (item.isValidate && newLoginState.checkValidate[item.inputKey] != inputStatus.success) {
+        if (!(newLoginState.checkValidate[item.inputKey] == inputStatus.normal && this.state.login.values[item.inputKey])) {
+          checkButtonStatus = false
+        }
+      }
+    })
+    newLoginState.buttonStatus = checkButtonStatus
+    this.setState({login: newLoginState})
+  }
+  loginSubmit = async () => {
+    const loginSuccess = await this.props.userActions.login(this.state.login.values)
+    if (loginSuccess) {
+      this.props.history.push('/')
     }
-    this.props.userActions.loginSuccess(res.data.token, res.data.user);
-    window.location.replace('/')
-  };
-  isvalidEmail = email => {
-    if (email === "" || email.indexOf("@") === -1 || email.indexOf(".") === -1)
-      return false;
-    return true;
   };
   render() {
     return (
-      <div>
+      <div className="h-100">
         <Login
-          loginSubmit={(email, password) => this.loginSubmit(email, password)}
-          notiLogin={this.state.notiLogin}
+          onChangeFieldLogin={(inputKey, text, newInputStatus) => this.onChangeFieldLogin(inputKey, text, newInputStatus)}
+          loginSubmit={() => this.loginSubmit()}
+          state={this.state}
         />
       </div>
     );

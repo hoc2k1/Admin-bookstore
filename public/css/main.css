@@ -48,8 +48,14 @@ body, input {
 body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--color-bg);
+  height: 100vh !important;
+  width: 100vw !important;
   position: relative;
   font-weight: 400px;
+}
+#root {
+  height: 100vh !important;
+  width: 100vw !important;
 }
 .normal-width-input, .width-small {
 	width: 100%;
@@ -69,6 +75,7 @@ body {
 .login-form {
   display: flex;
   flex-direction: column;
+  width: 100%;
   align-items: center;
 }
 .text-link {
@@ -81,6 +88,9 @@ body {
   font-size: calc(var(--font-size-heading) * 0.8);
   font-weight: bold;
   transition: all 0.3s;
+}
+.text-center {
+  text-align: center;
 }
 .heading {
   font-size: var(--font-size-heading);
@@ -124,8 +134,36 @@ body {
   background-color: var(--color-theme);
   color: var(--color-button-text);
 }
+.cursor-pointer {
+  cursor: pointer;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
 .button-content {
   transition: transform 0.2s ease-in-out;
+}
+.font-size-normal {
+  font-size: var(--font-size-text);
+}
+.header-login {
+  border-bottom: 2px solid var(--color-border);
+  opacity: var(--icon-opacity);
+}
+.header-login.active {
+  color: var(--color-theme);
+  border-bottom-color: var(--color-theme);
+  opacity: 1;
+}
+.absolute-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0
 }
 .button.active:hover {
   opacity: 1;
