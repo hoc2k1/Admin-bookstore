@@ -18,11 +18,7 @@ class App extends Component {
           <Route exact path="/bookmanager" component={BookContainer} />
           <Route exact path="/categorymanager" component={CategoryContainer} />
           <Route exact path="/authormanager" component={AuthorContainer} />
-          <Route
-            exact
-            path="/publishermanager"
-            component={PublisherContainer}
-          />
+          <Route exact path="/publishermanager" component={PublisherContainer} />
           <Route exact path="/usermanager" component={UserContainer} />
           <Route exact path="/login" component={LoginContainer} />
           <Route exact path="/statistical" component={StatisticalContainer} />
