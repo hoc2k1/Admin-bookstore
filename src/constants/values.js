@@ -96,12 +96,12 @@ export const navBarMenu = [
       {
         key: 'layout_home',
         title: 'Giao diện trang chủ',
-        url: '/layout/home',
+        url: '/layouthome',
       },
       {
         key: 'layout_banner',
         title: 'Banner',
-        url: '/layout/banner',
+        url: '/layoutbanner',
       }
     ]
   }

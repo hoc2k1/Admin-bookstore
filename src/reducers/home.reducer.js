@@ -8,6 +8,12 @@ const home = (state = {top_product: []}, action) => {
                 top_product: action.data
             }
         }
+        case homeTypes.SET_BANNERS: {
+            return {
+                ...state,
+                banners: action.data
+            }
+        }
         default: return state
     }
 }

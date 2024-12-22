@@ -4,15 +4,19 @@ import Bills from '../components/bills/bills'
 import { connect } from 'react-redux'
 import * as userActions from '../actions/user.action'
 import { bindActionCreators } from 'redux'
+import { checkNotEmpty } from '../config/identify';
 
 class BillsContainer extends BaseContainer {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      ...this.state
+    }
     this.props.userActions.auth()
   }
   renderContent() {
     return (
-      <Bills history={this.props.history}/>
+      <Bills history={this.props.history} parent={this}/>
     )
   }
 }

@@ -24,8 +24,8 @@ class App extends Component {
             <Route exact path="/authors" component={Authors} />
             <Route exact path="/bills" component={BillsContainer} />
             <Route exact path="/categories" component={CategoriesContainer} />
-            <Route exact path="/layout/banner" component={LayoutBanner} />
-            <Route exact path="/layout/home" component={LayoutHome} />
+            <Route exact path="/layoutbanner" component={LayoutBanner} />
+            <Route exact path="/layouthome" component={LayoutHome} />
             <Route exact path="/products" component={ProductsContainer} />
             <Route exact path="/publishers" component={PublishersContainer} />
             <Route exact path="/user" component={UsersContainer} />
