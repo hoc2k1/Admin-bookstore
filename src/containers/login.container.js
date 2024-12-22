@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import * as userActions from "../actions/user.action";
 import Login from "../components/login/login";
 import { loginForm, URL_BE, inputStatus } from "../constants/values";
+import toast from "react-hot-toast";
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class LoginContainer extends Component {
   loginSubmit = async () => {
     const loginSuccess = await this.props.userActions.login(this.state.login.values)
     if (loginSuccess) {
+      toast.success('Đăng nhập thành công!')
       this.props.history.push('/')
     }
   };

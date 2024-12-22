@@ -30,3 +30,79 @@ export const inputStatus = {
   error: 'error',
   success: 'success'
 }
+
+export const navBarMenu = [
+  {
+    key: 'homePage',
+    title: 'Trang chủ',
+    url: '/',
+    childrens: []
+  },
+  {
+    key: 'products',
+    title: 'Sản phẩm',
+    url: '',
+    childrens: [
+      {
+        key: 'products_products',
+        title: 'Sản phẩm',
+        url: '/products',
+      },
+      {
+        key: 'products_categories',
+        title: 'Thể loại',
+        url: '/categories',
+      },
+      {
+        key: 'products_authors',
+        title: 'Tác giả',
+        url: '/authors',
+      },
+      {
+        key: 'products_publishers',
+        title: 'Nhà xuất bản',
+        url: '/publishers',
+      }
+    ]
+  },
+  {
+    key: 'users',
+    title: 'Tài khoản',
+    url: '',
+    childrens: [
+      {
+        key: 'users_acount',
+        title: 'Tài khoản',
+        url: '/user',
+      },
+      {
+        key: 'user_addresses',
+        title: 'Địa chỉ',
+        url: '/addresses',
+      }
+    ]
+  },
+  {
+    key: 'bills',
+    title: 'Đơn hàng',
+    url: '/bills',
+    childrens: []
+  },
+  {
+    key: 'layout',
+    title: 'Khác',
+    url: '',
+    childrens: [
+      {
+        key: 'layout_home',
+        title: 'Giao diện trang chủ',
+        url: '/layout/home',
+      },
+      {
+        key: 'layout_banner',
+        title: 'Banner',
+        url: '/layout/banner',
+      }
+    ]
+  }
+]

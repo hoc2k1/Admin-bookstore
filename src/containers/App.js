@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomeContainer from "./home.container";
-import BookContainer from "./book.container";
-import CategoryContainer from "./category.container";
-import AuthorContainer from "./author.container";
-import PublisherContainer from "./publisher.container";
-import UserContainer from "./user.container";
+import AddressesContainer from "./addresses.container";
+import Authors from "./authors.container";
+import BillsContainer from "./bills.container";
+import CategoriesContainer from "./categories.container";
+import LayoutBanner from "./layout.banner.container";
+import LayoutHome from "./layout.home.container";
+import ProductsContainer from "./products.container";
+import PublishersContainer from "./publishers.container";
+import UsersContainer from "./users.container";
 import LoginContainer from "./login.container";
-import StatisticalContainer from './statistical.container'
-import BillContainer from './bill.container'
 import { Toaster } from 'react-hot-toast';
 class App extends Component {
   render() {
@@ -18,14 +20,16 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/" component={HomeContainer} />
-            <Route exact path="/bookmanager" component={BookContainer} />
-            <Route exact path="/categorymanager" component={CategoryContainer} />
-            <Route exact path="/authormanager" component={AuthorContainer} />
-            <Route exact path="/publishermanager" component={PublisherContainer} />
-            <Route exact path="/usermanager" component={UserContainer} />
+            <Route exact path="/addresses" component={AddressesContainer} />
+            <Route exact path="/authors" component={Authors} />
+            <Route exact path="/bills" component={BillsContainer} />
+            <Route exact path="/categories" component={CategoriesContainer} />
+            <Route exact path="/layout/banner" component={LayoutBanner} />
+            <Route exact path="/layout/home" component={LayoutHome} />
+            <Route exact path="/products" component={ProductsContainer} />
+            <Route exact path="/publishers" component={PublishersContainer} />
+            <Route exact path="/user" component={UsersContainer} />
             <Route exact path="/login" component={LoginContainer} />
-            <Route exact path="/statistical" component={StatisticalContainer} />
-            <Route exact path="/billmanager" component={BillContainer} />
           </Switch>
         </Router>
       </div>

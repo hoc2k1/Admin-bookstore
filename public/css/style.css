@@ -8758,16 +8758,6 @@
 
     }
 
-
-
-    .daterangepicker td.active, .daterangepicker td.active:hover, .datepicker td.active, .datepicker td.active:hover, .datepicker td span.active {
-
-        text-shadow: none;
-
-    }
-
-
-
     .datepicker th.switch {
 
         width: 125px;

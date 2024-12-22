@@ -1,18 +1,18 @@
 import React from 'react'
 import BaseContainer from './base.container';
-import Home from '../components/home/home';
+import Users from '../components/users/users';
 import { connect } from 'react-redux'
 import * as userActions from '../actions/user.action'
 import { bindActionCreators } from 'redux'
 
-class HomeContainer extends BaseContainer {
+class UsersContainer extends BaseContainer {
   constructor(props) {
     super(props);
     this.props.userActions.auth()
   }
   renderContent() {
     return (
-      <Home history={this.props.history}/>
+      <Users history={this.props.history}/>
     )
   }
 }
@@ -24,4 +24,4 @@ const mapDispatchToProps = dispatch => {
     userActions: bindActionCreators(userActions, dispatch)
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)

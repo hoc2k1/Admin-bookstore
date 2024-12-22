@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Home = () => {
+const Authors = () => {
   return (
     <div>
-      Home page
+      Authors page
     </div>
   )
 }
-export default Home
+export default Authors

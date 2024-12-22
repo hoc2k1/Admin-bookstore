@@ -128,11 +128,11 @@ export const setLoginFail = () => ({
 export const auth = () => async (dispatch, getState) => {
   if (storeConfig.getUser() === null) {
     dispatch(setLoginFail())
+    window.location.href = '/login'
     return false
   }
   let email = storeConfig.getUser().email
   let token = storeConfig.getToken()
-  console.log(email)
   let res
   try {
     res = await axios.post(`${URL_BE}auth`, {
@@ -141,11 +141,20 @@ export const auth = () => async (dispatch, getState) => {
     })
   }
   catch (err) {
+    toast.error(ERROR_MESSAGE)
+    window.location.href = '/login'
     dispatch(setLoginFail())
     return false
   }
-  dispatch(setLoginSuccess())
-  return true
+  if (res.data.error) {
+    toast.error("Hết phiên đăng nhập!")
+    window.location.href = '/login'
+    return false;
+  }
+  else {
+    dispatch(setLoginSuccess())
+    return true
+  }
 }
 export const login = (data) => async (dispatch, getState) => {
   let res
@@ -168,7 +177,7 @@ export const login = (data) => async (dispatch, getState) => {
   }
 }
 export const logout = () => (dispatch, getState) => {
-  console.log('logout ')
   storeConfig.clear()
   dispatch(setLoginFail())
+  toast.success('Đăng xuất thành công!')
 }
