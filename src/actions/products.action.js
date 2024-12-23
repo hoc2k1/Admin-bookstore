@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { productsTypes } from '../constants/action.types'
-import { URL_BE } from '../constants/values'
+import { ERROR_MESSAGE, URL_BE } from '../constants/values'
+import toast from 'react-hot-toast'
 
 export const getAllCategories = () => async (dispatch, getState) => {
     let res
@@ -11,6 +12,63 @@ export const getAllCategories = () => async (dispatch, getState) => {
       return
     }
     dispatch(setCategories(res.data.data))
+}
+
+
+export const getAllAuthors = () => async (dispatch, getState) => {
+    let res
+    try {
+      res = await axios.get(`${URL_BE}author`)
+    }
+    catch (err) {
+      return
+    }
+
+    dispatch(setAuthors(res.data.data))
+}
+export const addAuthor = (data) => async (dispatch, getState) => {
+  console.log(34, data)
+  let res
+  try {
+    res = await axios.post(`${URL_BE}admin/addauthor`, {
+      name: data.name
+    })
+  }
+  catch (err) {
+    toast.error(ERROR_MESSAGE)
+    return false
+  }
+  if(res.data.error) {
+    toast.error(res.data.error)
+    return false
+  }
+  else {
+    toast.success('Thêm tác giả thành công!')
+    dispatch(getAllAuthors())
+    return true
+  }
+}
+export const updateAuthor = (data) => async (dispatch, getState) => {
+  let res
+  try {
+    res = await axios.post(`${URL_BE}admin/updateauthor`, {
+      id: data.id,
+      name: data.name
+    })
+  }
+  catch (err) {
+    toast.error(ERROR_MESSAGE)
+    return
+  }
+  if(res.data.error) {
+    toast.error(res.data.error)
+    return false
+  }
+  else {
+    toast.success('Cập nhật tác giả thành công!')
+    dispatch(getAllAuthors())
+    return true
+  }
 }
 
 export const setCategories = (data) => ({

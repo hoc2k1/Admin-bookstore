@@ -6,12 +6,30 @@ import Loading from '../components/loading/loading';
 class BaseContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.isEdit = false
     this.state = {
-      loading: true
+      loading: true,
+      form: {
+        values: {},
+        checkValidate: [],
+        buttonStatus: false
+      },
     }
   }
   showLoading(data) {
     this.setState({loading: data})
+  }
+  onChangeField () {
+
+  }
+  onSubmit() {
+
+  } 
+  onAdd() {
+
+  }
+  onEdit() {
+    
   }
   renderContent() {
     return (

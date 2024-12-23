@@ -10,7 +10,6 @@ const Header = (props) => {
   const [showDrawer, setShowDrawer] = useState(false)
   return (
     <div>
-
       <div className='header-container'>
         <div className='d-flex gap-2 align-items-center'>
           <div className='d-flex d-md-none' onClick={() => setShowDrawer(true)}>

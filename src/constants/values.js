@@ -1,5 +1,7 @@
 export const URL_BE = 'http://localhost:8080/'
+
 export const ERROR_MESSAGE = "Something when wrong!"
+
 export const loginForm = [
   {
     inputKey: 'email',
@@ -21,6 +23,19 @@ export const loginForm = [
     label: 'Mật khẩu',
     errorMessage: 'Mật khẩu phải có ít nhất 6 ký tự'
   }
+]
+
+export const authorForm = [
+  {
+    inputKey: 'name',
+    type: 'text',
+    placeholder: '',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Tác giả',
+    errorMessage: 'Tên không hợp lệ'
+  },
 ]
 
 export const currency = 'đ'
