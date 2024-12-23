@@ -46,8 +46,31 @@ export const publisherForm = [
     isValidate: true,
     defaultValue: '',
     required: true,
-    label: 'Tác giả',
+    label: 'Nhà xuất bản',
     errorMessage: 'Tên không hợp lệ'
+  },
+]
+
+export const categoryForm = [
+  {
+    inputKey: 'name',
+    type: 'text',
+    placeholder: '',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Tên',
+    errorMessage: 'Tên không hợp lệ'
+  },
+  {
+    inputKey: 'image',
+    type: 'image',
+    placeholder: '',
+    isValidate: false,
+    defaultValue: '',
+    required: false,
+    label: 'Ảnh',
+    errorMessage: ''
   },
 ]
 

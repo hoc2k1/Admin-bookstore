@@ -14,6 +14,52 @@ export const getAllCategories = () => async (dispatch, getState) => {
     dispatch(setCategories(res.data.data))
 }
 
+export const addCategory = (data) => async (dispatch, getState) => {
+  let res
+  try {
+    res = await axios.post(`${URL_BE}admin/addcategory`, {
+      name: data.name,
+      image: data.image
+    })
+  }
+  catch (err) {
+    toast.error(ERROR_MESSAGE)
+    return false
+  }
+  if(res.data.error) {
+    toast.error(res.data.error)
+    return false
+  }
+  else {
+    toast.success('Thêm thể loại sách thành công!')
+    dispatch(getAllCategories())
+    return true
+  }
+}
+export const updateCategory = (data) => async (dispatch, getState) => {
+  let res
+  try {
+    res = await axios.post(`${URL_BE}admin/updatecategory`, {
+      id: data.id,
+      name: data.name,
+      image: data.image
+    })
+  }
+  catch (err) {
+    toast.error(ERROR_MESSAGE)
+    return
+  }
+  if(res.data.error) {
+    toast.error(res.data.error)
+    return false
+  }
+  else {
+    toast.success('Cập nhật tác giả thành công!')
+    dispatch(getAllCategories())
+    return true
+  }
+}
+
 
 export const getAllAuthors = () => async (dispatch, getState) => {
     let res

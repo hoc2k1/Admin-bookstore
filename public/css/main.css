@@ -31,6 +31,10 @@
 .status-wait {
   color: #FF6600;
 }
+.image-picker {
+  width: 100%;
+  object-fit: 'container';
+}
 .spinner {
   width: 80px;
   height: 80px;

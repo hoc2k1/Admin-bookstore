@@ -4,14 +4,60 @@ import * as homeActions from '../../actions/home.action'
 import { bindActionCreators } from 'redux'
 import HeaderContent from '../header/header.content'
 import CustomModal from '../global/custom.modal'
+import { categoryForm, inputStatus } from '../../constants/values'
+import FloatingInput from '../global/floating.input'
+import ImagePickerInput from '../global/imagePickerInput'
+import Button from '../global/button'
 
 const Categories = (props) => {
   const [showModal, setShowModal] = useState(false)
-  const editItem = (item) => {
+  const editItem = (data) => {
+    const newFormState = props.parent.state.form
+    props.parent.isEdit = true
+    newFormState.values['id'] = data._id
+    categoryForm.map((item) => {
+      newFormState.values[item.inputKey] = data[item.inputKey]
+      if (item.isValidate) {
+        newFormState.checkValidate[item.inputKey] = inputStatus.normal
+      }
+    })
 
+    let checkButtonStatus = true
+    categoryForm.map((item) => {
+      if (item.isValidate && newFormState.checkValidate[item.inputKey] != inputStatus.success) {
+        if (!(newFormState.checkValidate[item.inputKey] == inputStatus.normal && newFormState.values[item.inputKey])) {
+          checkButtonStatus = false
+        }
+      }
+    })
+    newFormState.buttonStatus = checkButtonStatus
+
+    props.parent.setState({form: newFormState})
+    setShowModal(true)
   }
   const removeItem = (item) => {
 
+  }
+  const addItem = () => {
+    const newFormState = props.parent.state.form
+    props.parent.isEdit = false
+    categoryForm.map((item) => {
+      newFormState.values[item.inputKey] = ''
+      if (item.isValidate) {
+        newFormState.checkValidate[item.inputKey] = inputStatus.normal
+      }
+    })
+    props.parent.setState({form: newFormState})
+    setShowModal(true)
+  }
+  const onClickButton = (id=null) => {
+    setShowModal(false)
+    if(props.parent.isEdit) {
+      props.onEdit()
+    }
+    else {
+      props.onAdd()
+    }
   }
   const renderHeaderGrid = () => {
     return (
@@ -80,7 +126,35 @@ const Categories = (props) => {
       <HeaderContent onCLickHeader={() => setShowModal(true)} title="Thêm thể loại sách"/>
       {renderGrid()}
       <CustomModal closeModal={() => setShowModal(false)} showPopup={showModal}>
-
+        <div className='login-form'>
+          {categoryForm.map((item, index) => {
+            if(item.type == 'image') {
+              return (
+                <ImagePickerInput 
+                  {...item}
+                  key={`login-${index}`}
+                  value={props.parent.state.form.values[item.inputKey]}
+                  checkValidate={props.parent.state.form.checkValidate[item.inputKey]}
+                  onChange={(inputKey, text, newInputStatus) => props.onChangeField(inputKey, text, newInputStatus)}
+                />
+              )
+            }
+            else {
+              return (
+                <FloatingInput
+                  {...item}
+                  key={`login-${index}`}
+                  value={props.parent.state.form.values[item.inputKey]}
+                  checkValidate={props.parent.state.form.checkValidate[item.inputKey]}
+                  onChange={(inputKey, text, newInputStatus) => props.onChangeField(inputKey, text, newInputStatus)} 
+                />
+              )
+            }
+          })}
+          <Button buttonStatus={props.parent.state.form.buttonStatus} onClick={() => onClickButton()}>
+            <span className="heading">Lưu thông tin</span>
+          </Button>
+        </div>
       </CustomModal>
     </div>
   )

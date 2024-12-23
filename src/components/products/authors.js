@@ -16,7 +16,7 @@ const Authors = (props) => {
     props.parent.isEdit = true
     newFormState.values['id'] = data._id
     authorForm.map((item) => {
-      newFormState.values[item.inputKey] = data.name
+      newFormState.values[item.inputKey] = data[item.inputKey]
       if (item.isValidate) {
         newFormState.checkValidate[item.inputKey] = inputStatus.normal
       }
