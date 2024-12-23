@@ -27,7 +27,6 @@ export const getAllAuthors = () => async (dispatch, getState) => {
     dispatch(setAuthors(res.data.data))
 }
 export const addAuthor = (data) => async (dispatch, getState) => {
-  console.log(34, data)
   let res
   try {
     res = await axios.post(`${URL_BE}admin/addauthor`, {
@@ -69,6 +68,61 @@ export const updateAuthor = (data) => async (dispatch, getState) => {
     dispatch(getAllAuthors())
     return true
   }
+}
+
+export const getAllPublishers = () => async (dispatch, getState) => {
+  let res
+  try {
+    res = await axios.get(`${URL_BE}publisher`)
+  }
+  catch (err) {
+    return
+  }
+
+  dispatch(setPublishers(res.data.data))
+}
+export const addPublisher = (data) => async (dispatch, getState) => {
+let res
+try {
+  res = await axios.post(`${URL_BE}admin/addpublisher`, {
+    name: data.name
+  })
+}
+catch (err) {
+  toast.error(ERROR_MESSAGE)
+  return false
+}
+if(res.data.error) {
+  toast.error(res.data.error)
+  return false
+}
+else {
+  toast.success('Thêm nhà xuất bản thành công!')
+  dispatch(getAllPublishers())
+  return true
+}
+}
+export const updatePublisher = (data) => async (dispatch, getState) => {
+let res
+try {
+  res = await axios.post(`${URL_BE}admin/updatepublisher`, {
+    id: data.id,
+    name: data.name
+  })
+}
+catch (err) {
+  toast.error(ERROR_MESSAGE)
+  return
+}
+if(res.data.error) {
+  toast.error(res.data.error)
+  return false
+}
+else {
+  toast.success('Cập nhật nhà xuất bản thành công!')
+  dispatch(getAllPublishers())
+  return true
+}
 }
 
 export const setCategories = (data) => ({

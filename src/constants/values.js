@@ -38,6 +38,19 @@ export const authorForm = [
   },
 ]
 
+export const publisherForm = [
+  {
+    inputKey: 'name',
+    type: 'text',
+    placeholder: '',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Tác giả',
+    errorMessage: 'Tên không hợp lệ'
+  },
+]
+
 export const currency = 'đ'
 
 export const inputStatus = {
