@@ -18,9 +18,9 @@ const LayoutBanner = (props) => {
   }
   return (
     <div className='w-100 h-100 d-flex flex-column'>
-      <HeaderContent onCLickHeader={() => setShowModal(true)} title="Thêm banner"/>
+      <HeaderContent onClickHeader={() => setShowModal(true)} title="Thêm banner"/>
       {renderGrid()}
-      <CustomModal closeModal={() => setShowModal(false)} showPopup={showModal}>
+      <CustomModal closeModal={() => setShowModal(false)} showModal={showModal}>
 
       </CustomModal>
     </div>

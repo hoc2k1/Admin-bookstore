@@ -15,11 +15,15 @@ export const getAllCategories = () => async (dispatch, getState) => {
 }
 
 export const addCategory = (data) => async (dispatch, getState) => {
+  const formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('image', data.image);
   let res
   try {
-    res = await axios.post(`${URL_BE}admin/addcategory`, {
-      name: data.name,
-      image: data.image
+    res = await axios.post(`${URL_BE}admin/addcategory`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
     })
   }
   catch (err) {
@@ -38,11 +42,15 @@ export const addCategory = (data) => async (dispatch, getState) => {
 }
 export const updateCategory = (data) => async (dispatch, getState) => {
   let res
+  const formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('image', data.image);
+  formData.append('id', data.id)
   try {
-    res = await axios.post(`${URL_BE}admin/updatecategory`, {
-      id: data.id,
-      name: data.name,
-      image: data.image
+    res = await axios.post(`${URL_BE}admin/updatecategory`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
     })
   }
   catch (err) {

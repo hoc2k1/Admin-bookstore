@@ -16,12 +16,7 @@ class CategoriesContainer extends BaseContainer {
     }
     this.props.productsAction.getAllCategories()
     this.props.userActions.auth()
-    categoryForm.map((item) => {
-      this.state.form.values[item.inputKey] = ''
-      if (item.isValidate) {
-        this.state.form.checkValidate[item.inputKey] = inputStatus.normal
-      }
-    })
+    this.form = categoryForm
   }
   componentWillReceiveProps(nextProps) {
     if (checkNotEmpty(this.props.categories)) {
@@ -35,40 +30,23 @@ class CategoriesContainer extends BaseContainer {
       }
     }
   }
-  onChangeField(inputKey, text, newInputStatus) {
-    const newFormState = this.state.form;
-    newFormState.values[inputKey] = text;
-    newFormState.checkValidate[inputKey] = newInputStatus;
-    let checkButtonStatus = true
-
-    categoryForm.map((item) => {
-      if (item.isValidate && newFormState.checkValidate[item.inputKey] != inputStatus.success) {
-        if (!(newFormState.checkValidate[item.inputKey] == inputStatus.normal && this.state.form.values[item.inputKey])) {
-          checkButtonStatus = false
-        }
-      }
-    })
-    newFormState.buttonStatus = checkButtonStatus
-    this.setState({form: newFormState})
-  }
   onAdd = async () => {
     this.showLoading(true);
     await this.props.productsAction.addCategory(this.state.form.values);
     this.showLoading(false);
+    this.setState({ showLoading: false, showModal: false })
   };
   onEdit = async () => {
     this.showLoading(true);
     await this.props.productsAction.updateCategory(this.state.form.values);
-    this.showLoading(false);
+    this.setState({ showLoading: false, showModal: false })
   }
   renderContent() {
     return (
       <Categories 
         history={this.props.history} 
+        state={this.state}
         parent={this}
-        onAdd={() => this.onAdd()}
-        onEdit={() => this.onEdit()}
-        onChangeField={(inputKey, text, newInputStatus) => this.onChangeField(inputKey, text, newInputStatus)}
       />
     )
   }

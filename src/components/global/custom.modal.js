@@ -1,10 +1,10 @@
 import React from 'react'
 import Modal from 'react-modal';
 
-const CustomModal = ({children, showPopup, closeModal}) => {
+const CustomModal = ({children, showModal, closeModal}) => {
   return (
     <Modal 
-      isOpen={showPopup}
+      isOpen={showModal}
       onRequestClose={() => closeModal()}
       shouldCloseOnOverlayClick={true}
       ariaHideApp={false}

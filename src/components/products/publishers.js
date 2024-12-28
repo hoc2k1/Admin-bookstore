@@ -35,9 +35,6 @@ const Publishers = (props) => {
     props.parent.setState({form: newFormState})
     setShowModal(true)
   }
-  const removeItem = (data) => {
-
-  }
   const addItem = () => {
     const newFormState = props.parent.state.form
     props.parent.isEdit = false
@@ -81,7 +78,7 @@ const Publishers = (props) => {
         </div>
         <div className='col-6 d-flex align-items-center py-md-2 py-1 gap-2 gap-md-3'>
           <i className='fa fa-pencil font-size-normal p-2 secondary-bg cursor-pointer icon-button' onClick={() => editItem(item)}></i>
-          {/* <i className='fa fa-trash font-size-normal p-2 secondary-bg icon-delete cursor-pointer icon-button' onClick={() => removeItem(item)}></i> */}
+          {/* <i className='fa fa-trash font-size-normal p-2 secondary-bg icon-delete cursor-pointer icon-button' onClick={() => props.parent.removeItem(item)}></i> */}
         </div>
       </div>
     )
@@ -115,9 +112,9 @@ const Publishers = (props) => {
   }
   return (
     <div className='w-100 h-100 d-flex flex-column'>
-      <HeaderContent onCLickHeader={() => addItem()} title="Thêm nhà xuất bản"/>
+      <HeaderContent onClickHeader={() => addItem()} title="Thêm nhà xuất bản"/>
       {renderGrid()}
-      <CustomModal closeModal={() => setShowModal(false)} showPopup={showModal}>
+      <CustomModal closeModal={() => setShowModal(false)} showModal={showModal}>
         <div className='login-form'>
           {publisherForm.map((item, index) => {
             return (
