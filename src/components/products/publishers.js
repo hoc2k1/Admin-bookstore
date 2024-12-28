@@ -1,63 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import * as homeActions from '../../actions/home.action'
 import { bindActionCreators } from 'redux'
 import HeaderContent from '../header/header.content'
 import CustomModal from '../global/custom.modal'
-import { publisherForm, inputStatus } from '../../constants/values'
-import FloatingInput from '../global/floating.input'
-import Button from '../global/button'
+import Form from '../global/form'
 
 const Publishers = (props) => {
-  const [showModal, setShowModal] = useState(false)
-
-  const editItem = (data) => {
-    const newFormState = props.parent.state.form
-    props.parent.isEdit = true
-    newFormState.values['id'] = data._id
-    publisherForm.map((item) => {
-      newFormState.values[item.inputKey] = data[item.inputKey]
-      if (item.isValidate) {
-        newFormState.checkValidate[item.inputKey] = inputStatus.normal
-      }
-    })
-
-    let checkButtonStatus = true
-    publisherForm.map((item) => {
-      if (item.isValidate && newFormState.checkValidate[item.inputKey] != inputStatus.success) {
-        if (!(newFormState.checkValidate[item.inputKey] == inputStatus.normal && newFormState.values[item.inputKey])) {
-          checkButtonStatus = false
-        }
-      }
-    })
-    newFormState.buttonStatus = checkButtonStatus
-
-    props.parent.setState({form: newFormState})
-    setShowModal(true)
-  }
-  const addItem = () => {
-    const newFormState = props.parent.state.form
-    props.parent.isEdit = false
-    publisherForm.map((item) => {
-      newFormState.values[item.inputKey] = ''
-      if (item.isValidate) {
-        newFormState.checkValidate[item.inputKey] = inputStatus.normal
-      }
-    })
-    props.parent.setState({form: newFormState})
-    setShowModal(true)
-  }
-
-  const onClickButton = (id=null) => {
-    setShowModal(false)
-    if(props.parent.isEdit) {
-      props.onEdit()
-    }
-    else {
-      props.onAdd()
-    }
-  }
-  
   const renderHeaderGrid = () => {
     return (
       <div className='row w-100 mx-auto'>
@@ -77,7 +26,7 @@ const Publishers = (props) => {
           <span>{item.name}</span>
         </div>
         <div className='col-6 d-flex align-items-center py-md-2 py-1 gap-2 gap-md-3'>
-          <i className='fa fa-pencil font-size-normal p-2 secondary-bg cursor-pointer icon-button' onClick={() => editItem(item)}></i>
+          <i className='fa fa-pencil font-size-normal p-2 secondary-bg cursor-pointer icon-button' onClick={() => props.parent.onClickEdit(item)}></i>
           {/* <i className='fa fa-trash font-size-normal p-2 secondary-bg icon-delete cursor-pointer icon-button' onClick={() => props.parent.removeItem(item)}></i> */}
         </div>
       </div>
@@ -112,24 +61,15 @@ const Publishers = (props) => {
   }
   return (
     <div className='w-100 h-100 d-flex flex-column'>
-      <HeaderContent onClickHeader={() => addItem()} title="Thêm nhà xuất bản"/>
+      <HeaderContent onClickHeader={() => props.parent.onClickAdd()} title="Thêm nhà xuất bản"/>
       {renderGrid()}
-      <CustomModal closeModal={() => setShowModal(false)} showModal={showModal}>
-        <div className='login-form'>
-          {publisherForm.map((item, index) => {
-            return (
-              <FloatingInput
-                {...item}
-                key={`login-${index}`}
-                value={props.parent.state.form.values[item.inputKey]}
-                checkValidate={props.parent.state.form.checkValidate[item.inputKey]}
-                onChange={(inputKey, text, newInputStatus) => props.onChangeField(inputKey, text, newInputStatus)} />
-            )
-          })}
-          <Button buttonStatus={props.parent.state.form.buttonStatus} onClick={() => onClickButton()}>
-            <span className="heading">Lưu thông tin</span>
-          </Button>
-        </div>
+      <CustomModal closeModal={() => props.parent.setState({showModal: false})} showModal={props.parent.state.showModal}>
+        <Form
+          form={props.parent.form} 
+          stateForm={props.parent.state.form} 
+          onChangeField={props.parent.onChangeField} 
+          onClickButton={props.parent.onClickButton}
+        />
       </CustomModal>
     </div>
   )

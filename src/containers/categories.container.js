@@ -34,12 +34,12 @@ class CategoriesContainer extends BaseContainer {
     this.showLoading(true);
     await this.props.productsAction.addCategory(this.state.form.values);
     this.showLoading(false);
-    this.setState({ showLoading: false, showModal: false })
+    this.setState({ loading: false, showModal: false })
   };
   onEdit = async () => {
     this.showLoading(true);
     await this.props.productsAction.updateCategory(this.state.form.values);
-    this.setState({ showLoading: false, showModal: false })
+    this.setState({ loading: false, showModal: false })
   }
   renderContent() {
     return (

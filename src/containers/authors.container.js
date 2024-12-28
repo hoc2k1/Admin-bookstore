@@ -6,7 +6,7 @@ import * as userActions from '../actions/user.action'
 import * as productsAction from '../actions/products.action'
 import { bindActionCreators } from 'redux'
 import { checkNotEmpty } from '../config/identify';
-import { authorForm, inputStatus } from '../constants/values';
+import { authorForm } from '../constants/values';
 
 class AuthorsContainer extends BaseContainer {
   constructor(props) {
@@ -16,12 +16,7 @@ class AuthorsContainer extends BaseContainer {
     }
     this.props.productsAction.getAllAuthors()
     this.props.userActions.auth()
-    authorForm.map((item) => {
-      this.state.form.values[item.inputKey] = ''
-      if (item.isValidate) {
-        this.state.form.checkValidate[item.inputKey] = inputStatus.normal
-      }
-    })
+    this.form = authorForm
   }
   componentWillReceiveProps(nextProps) {
     if (checkNotEmpty(this.props.authors)) {
@@ -35,40 +30,22 @@ class AuthorsContainer extends BaseContainer {
       }
     }
   }
-  onChangeField(inputKey, text, newInputStatus) {
-    const newFormState = this.state.form;
-    newFormState.values[inputKey] = text;
-    newFormState.checkValidate[inputKey] = newInputStatus;
-    let checkButtonStatus = true
-
-    authorForm.map((item) => {
-      if (item.isValidate && newFormState.checkValidate[item.inputKey] != inputStatus.success) {
-        if (!(newFormState.checkValidate[item.inputKey] == inputStatus.normal && this.state.form.values[item.inputKey])) {
-          checkButtonStatus = false
-        }
-      }
-    })
-    newFormState.buttonStatus = checkButtonStatus
-    this.setState({form: newFormState})
-  }
   onAdd = async () => {
     this.showLoading(true);
     await this.props.productsAction.addAuthor(this.state.form.values);
-    this.showLoading(false);
+    this.setState({ loading: false, showModal: false })
   };
   onEdit = async () => {
     this.showLoading(true);
     await this.props.productsAction.updateAuthor(this.state.form.values);
-    this.showLoading(false);
+    this.setState({ loading: false, showModal: false })
   }
   renderContent() {
     return (
       <Authors 
         history={this.props.history}
+        state={this.state}
         parent={this}
-        onAdd={() => this.onAdd()}
-        onEdit={() => this.onEdit()}
-        onChangeField={(inputKey, text, newInputStatus) => this.onChangeField(inputKey, text, newInputStatus)}
       />
     )
   }

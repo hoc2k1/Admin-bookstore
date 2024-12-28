@@ -111,7 +111,7 @@ export const updateAuthor = (data) => async (dispatch, getState) => {
   }
   catch (err) {
     toast.error(ERROR_MESSAGE)
-    return
+    return false
   }
   if(res.data.error) {
     toast.error(res.data.error)

@@ -4,9 +4,6 @@ import * as homeActions from '../../actions/home.action'
 import { bindActionCreators } from 'redux'
 import HeaderContent from '../header/header.content'
 import CustomModal from '../global/custom.modal'
-import FloatingInput from '../global/floating.input'
-import ImagePickerInput from '../global/imagePickerInput'
-import Button from '../global/button'
 import Form from '../global/form'
 
 const Categories = (props) => {
@@ -80,38 +77,9 @@ const Categories = (props) => {
         <Form 
           form={props.parent.form} 
           stateForm={props.parent.state.form} 
-          onChangeField={(inputKey, text, newInputStatus) => props.parent.onChangeField((inputKey, text, newInputStatus))} 
-          onClickButton={() => props.parent.onClickButton()}
+          onChangeField={props.parent.onChangeField} 
+          onClickButton={props.parent.onClickButton}
         />
-        {/* <div className='login-form'>
-          {props.parent.form.map((item, index) => {
-            if(item.type == 'image') {
-              return (
-                <ImagePickerInput 
-                  {...item}
-                  key={`login-${index}`}
-                  value={props.parent.state.form.values[item.inputKey]}
-                  checkValidate={props.parent.state.form.checkValidate[item.inputKey]}
-                  onChange={(inputKey, text, newInputStatus) => props.parent.onChangeField(inputKey, text, newInputStatus)}
-                />
-              )
-            }
-            else {
-              return (
-                <FloatingInput
-                  {...item}
-                  key={`login-${index}`}
-                  value={props.parent.state.form.values[item.inputKey]}
-                  checkValidate={props.parent.state.form.checkValidate[item.inputKey]}
-                  onChange={(inputKey, text, newInputStatus) => props.parent.onChangeField(inputKey, text, newInputStatus)} 
-                />
-              )
-            }
-          })}
-          <Button buttonStatus={props.parent.state.form.buttonStatus} onClick={() => props.parent.onClickButton()}>
-            <span className="heading">Lưu thông tin</span>
-          </Button>
-        </div> */}
       </CustomModal>
     </div>
   )
