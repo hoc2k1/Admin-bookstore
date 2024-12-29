@@ -3,6 +3,8 @@ import NavBar from '../components/navbar/navbar'
 import Header from '../components/header/header';
 import Loading from '../components/loading/loading';
 import { inputStatus } from '../constants/values';
+import CustomModal from '../components/global/custom.modal';
+import Button from '../components/global/button'
 
 class BaseContainer extends React.Component {
   constructor(props) {
@@ -15,7 +17,8 @@ class BaseContainer extends React.Component {
         checkValidate: [],
         buttonStatus: false
       },
-      showModal: false
+      showModal: false,
+      showModalDelete: false
     }
     this.form=[]
     this.onSubmit = this.onSubmit.bind(this)
@@ -90,6 +93,10 @@ class BaseContainer extends React.Component {
     newFormState.buttonStatus = false
     this.setState({form: newFormState, showModal: true})
   }
+  onClickRemove (data) {  
+    this.state.form.values['id'] = data._id;
+    this.setState({ showModalDelete: true })
+  }
   onClickButton() {
     if(this.isEdit) {
       this.onEdit()
@@ -125,6 +132,21 @@ class BaseContainer extends React.Component {
             {(this.state.loading) ? (<Loading />) : this.renderContent()}
           </div>
         </div>
+        <CustomModal closeModal={() => this.setState({showModalDelete: false})} showModal={this.state.showModalDelete}>
+          <div className='w-100 h-100 d-flex flex-column justify-content-center align-items-center gap-4 gap-md-3'>
+            <div className=''>
+              <span className='heading-large'>Bạn có muốn xóa không?</span>
+            </div>
+            <div className='d-flex gap-md-3 gap-3'>
+              <Button buttonStatus={true} customButton={"bg-transparent border color-text"} onClick={() => this.setState({showModalDelete: false})}>
+                <span className="heading">Không</span>
+              </Button>
+              <Button buttonStatus={true} onClick={() => this.onRemove()}>
+                <span className="heading">Có</span>
+              </Button>
+            </div>
+          </div>
+        </CustomModal>
       </div>
     )
   }

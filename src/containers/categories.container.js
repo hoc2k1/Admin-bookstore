@@ -6,7 +6,7 @@ import * as userActions from '../actions/user.action'
 import * as productsAction from '../actions/products.action'
 import { bindActionCreators } from 'redux'
 import { checkNotEmpty } from '../config/identify';
-import { categoryForm, inputStatus } from '../constants/values';
+import { categoryForm } from '../constants/values';
 
 class CategoriesContainer extends BaseContainer {
   constructor(props) {
@@ -33,7 +33,6 @@ class CategoriesContainer extends BaseContainer {
   onAdd = async () => {
     this.showLoading(true);
     await this.props.productsAction.addCategory(this.state.form.values);
-    this.showLoading(false);
     this.setState({ loading: false, showModal: false })
   };
   onEdit = async () => {

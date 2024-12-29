@@ -1,7 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as homeActions from '../../actions/home.action'
-import { bindActionCreators } from 'redux'
 import HeaderContent from '../header/header.content'
 import CustomModal from '../global/custom.modal'
 import Form from '../global/form'
@@ -88,9 +86,4 @@ const mapStateToProps = state => ({
   categories: state.productsReducers.products.categories
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    homeActions: bindActionCreators(homeActions, dispatch)
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Categories)
+export default connect(mapStateToProps, null)(Categories)

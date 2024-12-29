@@ -60,7 +60,7 @@ class LoginContainer extends Component {
   }
 }
 const mapStateToProps = state => ({
-    islogin: state.userReducers.user.islogin
+  islogin: state.usersReducers.users.islogin
 });
 
 const mapDispatchToProps = dispatch => {
