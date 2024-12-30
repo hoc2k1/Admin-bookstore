@@ -4,30 +4,34 @@ import storeConfig from '../config/store.config'
 import { URL_BE, ERROR_MESSAGE } from '../constants/values'
 import toast from 'react-hot-toast'
 
-export const getAllUsers = () => async (dispatch, getState) => {
+export const getAllUsers = ({searchText, page}) => async (dispatch, getState) => {
   let res
   try {
-    res = await axios.get(`${URL_BE}admin/getAllUsers/`)
-  }
-  catch (err) {
-    console.log(err)
-    return
-  }
-  dispatch(setUser(res.data.data))
-}
-
-export const deleteUser = (email) => async (dispatch, getState) => {
-  let res
-  try {
-    res = await axios.post(`${URL_BE}admin/deleteuser/`, {
-      email: email
+    res = await axios.post(`${URL_BE}admin/getAllUsers/`, {
+      searchText: searchText,
+      page: page
     })
   }
   catch (err) {
     console.log(err)
     return
   }
-  dispatch(getAllUsers())
+  dispatch(setUserTotalPage(res.data.totalPages))
+  dispatch(setUser(res.data.data))
+}
+
+export const removeUser = (id) => async (dispatch, getState) => {
+  let res
+  try {
+    res = await axios.get(`${URL_BE}admin/deleteuser/${id}`)
+    toast.success('Xóa tài khoản thành công!');
+    return true;
+  }
+  catch (err) {
+    console.log(err)
+    toast.error(ERROR_MESSAGE)
+    return false;
+  }
 }
 export const auth = () => async (dispatch, getState) => {
   if (storeConfig.getUser() === null) {
@@ -104,14 +108,14 @@ export const removeAddress = (id) => async (dispatch, getState) => {
   let res
   try {
     res = await axios.get(`${URL_BE}address/delete/${id}`)
-    toast.success('Xóa địa chỉ thành công')
+    toast.success('Xóa địa chỉ thành công!')
+    return true;
   }
   catch (err) {
     console.log(err)
     toast.error(ERROR_MESSAGE)
-    return
+    return false
   }
-  dispatch(getAllAddresses())
 }
 export const loginSuccess = (token, user) => async (dispatch, getState) => {
   storeConfig.setUser(user)
@@ -128,6 +132,10 @@ export const setLoginFail = () => ({
 })
 export const setUser = (data) => ({
   type: userTypes.SET_USER,
+  data
+})
+export const setUserTotalPage = (data) => ({
+  type: userTypes.SET_USER_TOTAL_PAGE,
   data
 })
 export const setAddress = (data) => ({

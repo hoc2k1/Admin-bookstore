@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 const Pagination = ({totalPage, state, history}) => {
-  console.log(1, state)
   const renderPages = () => {
     const pages = []
     for (let i=1; i<=totalPage; i++) {

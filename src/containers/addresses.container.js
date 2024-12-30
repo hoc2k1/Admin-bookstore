@@ -19,8 +19,11 @@ class AddressesContainer extends BaseContainer {
   }
   onRemove = async () => {
     this.showLoading(true)
-    await this.props.userActions.removeAddress(this.state.form.values.id)
-    this.setState({ loading: false, showModalDelete: false })
+    const checkRemove = await this.props.userActions.removeAddress(this.state.form.values.id)
+    if (checkRemove) {
+      await this.props.userActions.getAllAddresses({searchText: this.state.searchText, page: this.state.page})
+      this.setState({ loading: false, showModalDelete: false })
+    } 
   }
   componentWillReceiveProps(nextProps) {
     if (checkNotEmpty(this.props.addresses)) {

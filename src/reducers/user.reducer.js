@@ -15,6 +15,12 @@ const users = (
         users: action.data,
       };
     }
+    case userTypes.SET_USER_TOTAL_PAGE: {
+      return {
+        ...state,
+        usersTotalPage: action.data
+      }
+    }
     case userTypes.LOGIN_SUCCESS: {
       return {
         ...state,
