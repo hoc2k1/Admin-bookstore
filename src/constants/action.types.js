@@ -10,7 +10,8 @@ export const userTypes = {
     SET_USER: 'SET_USER',
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
     LOGIN_FAIL: 'LOGIN_FAIL',
-    SET_ADDRESS: 'SET_ADDRESS'
+    SET_ADDRESS: 'SET_ADDRESS',
+    SET_ADDRESS_TOTAL_PAGE: 'SET_ADDRESS_TOTAL_PAGE'
 }
 
 export const homeTypes = {

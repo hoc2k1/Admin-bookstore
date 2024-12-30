@@ -33,6 +33,12 @@ const users = (
         addresses: action.data
       }
     }
+    case userTypes.SET_ADDRESS_TOTAL_PAGE: {
+      return {
+        ...state,
+        addressesTotalPage: action.data
+      }
+    }
     default:
       return state;
   }

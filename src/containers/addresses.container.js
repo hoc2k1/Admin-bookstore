@@ -14,8 +14,7 @@ class AddressesContainer extends BaseContainer {
       ...this.state
     }
     this.props.userActions.auth()
-    this.props.userActions.getAllUsers()
-    this.props.userActions.getAllAddresses()
+    this.props.userActions.getAllAddresses({searchText: this.state.searchText, page: this.state.page})
     this.form = addressForm
   }
   onRemove = async () => {
@@ -24,15 +23,22 @@ class AddressesContainer extends BaseContainer {
     this.setState({ loading: false, showModalDelete: false })
   }
   componentWillReceiveProps(nextProps) {
-    if (checkNotEmpty(this.props.addresses) && checkNotEmpty(this.props.users)) {
+    if (checkNotEmpty(this.props.addresses)) {
       if (this.state.loading) {
         this.showLoading(false)
       }
     }
-    else if ((nextProps.addresses != this.props.addresses) || (nextProps.users != this.props.users)) {
+    else if ((nextProps.addresses != this.props.addresses)) {
       if (this.state.loading) {
         this.showLoading(false)
       }
+    }
+    if(nextProps.location.search != this.props.location.search) {
+      this.state.searchText = this.state.searchText
+      this.state.searchType = this.state.searchType
+      const queryParams = new URLSearchParams(nextProps.location.search);
+      this.state.page = queryParams.get('page') || 1;
+      this.props.userActions.getAllAddresses({searchText: this.state.searchText, page: queryParams.get('page') || 1})
     }
   }
   renderContent() {
@@ -47,8 +53,7 @@ class AddressesContainer extends BaseContainer {
 }
 
 const mapStateToProps = state => ({
-  addresses: state.usersReducers.users.addresses,
-  users: state.usersReducers.users.users
+  addresses: state.usersReducers.users.addresses
 });
 
 const mapDispatchToProps = dispatch => {

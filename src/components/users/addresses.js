@@ -1,8 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { checkNotEmpty } from '../../config/identify'
+import Pagination from '../global/pagination'
 
 const Addresses = (props) => {
+  const renderSearch = () => {
+    return (
+      <div className='content-width mt-md-4 mt-3 d-flex align-items-center gap-2'>
+        <span>Tìm kiếm: </span>
+        <div className='border dflex align-items-center w-fit'>
+          <input 
+            type="text"
+            className={`p-2 border-0 outline-none`}
+            placeholder={"Tìm kiếm theo email"}
+            value={props.state.searchText}
+            onSubmit={() => props.parent.onSearch()}
+            onChange={(e) => {
+              props.parent.setState({ searchText: e.target.value })
+            }}
+          ></input>
+          <i className='fa fa-search heading color-theme borber-left p-2 cursor-pointer' onClick={() => props.parent.onSearch()}></i>
+        </div>
+        
+      </div>
+    )
+  }
   const renderHeaderGrid = () => {
     return (
       <div className='row w-100 mx-auto'>
@@ -43,10 +65,6 @@ const Addresses = (props) => {
     else {
       address += item.district + ', ' + item.province
     }
-    let user;
-    if (checkNotEmpty(props.users)) {
-      user = props.users.find(user => user._id == item.id_user);
-    }
     return (
       <div className='row border-bottom w-100 mx-auto'>
         <div className='col-2 d-flex align-items-center py-md-2 py-1'>
@@ -59,7 +77,7 @@ const Addresses = (props) => {
           <span>{item.phoneNumber}</span>
         </div>
         <div className='col-2 d-flex align-items-center py-md-2 py-1'>
-          <span>{user?.email}</span>
+          <span>{item.email}</span>
         </div>
         <div className='col-1 d-flex align-items-center py-md-2 py-1 gap-2 gap-md-3'>
           <i className='fa fa-trash font-size-normal p-2 secondary-bg icon-delete cursor-pointer icon-button' onClick={() => props.parent.onClickRemove(item)}></i>
@@ -70,7 +88,7 @@ const Addresses = (props) => {
   const renderGrid = () => {
     if (props.addresses?.length > 0) {
       return (
-        <div className='w-100 flex-grow-1 d-flex py-md-3 py-2 overflow-auto'>
+        <div className='w-100 flex-grow-1 d-flex py-md-3 py-2 overflow-auto flex-column justify-content-between'>
           <div className='content-width w-100 h-full overflow-x-auto'>
             <div className='h-fit w-200 w-md-150 w-lg-100'>
               {renderHeaderGrid()}
@@ -83,6 +101,11 @@ const Addresses = (props) => {
               })}
             </div>
           </div>
+          <Pagination
+            history={props.history}
+            state={props.state} 
+            totalPage={props.addressesTotalPage}
+          />
         </div>
       )
     }
@@ -98,12 +121,13 @@ const Addresses = (props) => {
   }
   return (
     <div className='w-100 h-100 d-flex flex-column'>
+      {renderSearch()}
       {renderGrid()}
     </div>
   )
 }
 const mapStateToProps = state => ({
   addresses: state.usersReducers.users.addresses,
-  users: state.usersReducers.users.users
+  addressesTotalPage: state.usersReducers.users.addressesTotalPage
 });
 export default connect(mapStateToProps, null)(Addresses)

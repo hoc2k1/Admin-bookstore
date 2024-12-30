@@ -85,16 +85,20 @@ export const logout = () => (dispatch, getState) => {
   dispatch(setLoginFail())
   toast.success('Đăng xuất thành công!')
 }
-export const getAllAddresses = () => async (dispatch, getState) => {
+export const getAllAddresses = ({searchText, page}) => async (dispatch, getState) => {
   let res
   try {
-    res = await axios.get(`${URL_BE}admin/getAllAddresses/`)
+    res = await axios.post(`${URL_BE}admin/getAllAddresses/`, {
+      searchText: searchText,
+      page: page
+    })
   }
   catch (err) {
     console.log(err)
     return
   }
   dispatch(setAddress(res.data.data))
+  dispatch(setAddressTotalPage(res.data.totalPages))
 }
 export const removeAddress = (id) => async (dispatch, getState) => {
   let res
@@ -130,7 +134,7 @@ export const setAddress = (data) => ({
   type: userTypes.SET_ADDRESS,
   data
 })
-export const setAdress = (data) => ({
-  type: userTypes.SET_ADDRESS,
+export const setAddressTotalPage = (data) => ({
+  type: userTypes.SET_ADDRESS_TOTAL_PAGE,
   data
 })

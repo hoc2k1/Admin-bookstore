@@ -18,7 +18,10 @@ class BaseContainer extends React.Component {
         buttonStatus: false
       },
       showModal: false,
-      showModalDelete: false
+      showModalDelete: false,
+      searchText: '',
+      searchType: '',
+      page: 1
     }
     this.form=[]
     this.onSubmit = this.onSubmit.bind(this)
@@ -29,6 +32,11 @@ class BaseContainer extends React.Component {
     this.onClickEdit = this.onClickEdit.bind(this)
     this.onClickAdd = this.onClickAdd.bind(this)
     this.onClickButton = this.onClickButton.bind(this)
+    this.onSearch = this.onSearch.bind(this)
+    const queryParams = new URLSearchParams(this.props.location.search);
+    this.state.searchText = queryParams.get('searchText');
+    this.state.searchType = queryParams.get('searchType');
+    this.state.page = queryParams.get('page') || 1;
   }
   componentWillMount() {
     this.form.map((item) => {
@@ -116,6 +124,20 @@ class BaseContainer extends React.Component {
   }
   onRemove() {
 
+  }
+  onSearch() {
+    if(this.state.searchType) {
+      this.props.history.push({
+        pathname: this.props.location.pathname,
+        search: `?searchText=${this.state.searchText}&searchType=${this.state.searchType}`
+      })
+    }
+    else {
+      this.props.history.push({
+        pathname: this.props.location.pathname,
+        search: `?searchText=${this.state.searchText}`
+      })
+    }
   }
   renderContent() {
     return (
