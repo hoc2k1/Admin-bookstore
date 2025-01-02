@@ -17,5 +17,7 @@ export const userTypes = {
 
 export const homeTypes = {
     SET_TOP_PRODUCT:' SET_TOP_PRODUCT',
-    SET_BANNERS: 'SET_BANNERS'
+    SET_BANNERS: 'SET_BANNERS',
+    SET_REVENUE: 'SET_REVENUE',
+    SET_TOTAL_REVENUE: 'SET_TOTAL_REVENUE'
 }

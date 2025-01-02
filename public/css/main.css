@@ -28,6 +28,14 @@
   }
 }
 
+.color-price-after-sale {
+  color: var(--color-price-after-sale);
+}
+.color-price-before-sale {
+  color: var(--color-price-before-sale);
+  text-decoration: line-through;
+}
+
 .status-wait {
   color: #FF6600;
 }

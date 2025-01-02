@@ -9,7 +9,7 @@ const Categories = (props) => {
     return (
       <div className='row w-100 mx-auto'>
         <div className='col-4 secondary-bg d-flex align-items-center py-md-2 py-1'>
-          <span className='heading-small color-theme'>Tên Thể loại</span>
+          <span className='heading-small color-theme'>Tên thể loại</span>
         </div>
         <div className='col-4 secondary-bg d-flex align-items-center py-md-2 py-1'>
           <span className='heading-small color-theme'>Ảnh</span>

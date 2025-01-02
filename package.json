@@ -5,8 +5,11 @@
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "axios": "^0.17.1",
+    "chart.js": "^4.4.7",
     "lodash": "^4.17.10",
     "react": "^16.3.2",
+    "react-chartjs-2": "^5.2.0",
+    "react-datepicker": "^7.5.0",
     "react-dom": "^16.3.2",
     "react-hot-toast": "^2.4.1",
     "react-modal": "^3.16.3",
