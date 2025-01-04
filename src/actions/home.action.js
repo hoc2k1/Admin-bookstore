@@ -48,7 +48,6 @@ export const getRevenue = ({startDate, endDate}) => async (dispatch, getState) =
     console.error("error: ", err);
     return;
   }
-  console.log(111, res.data.data[0].products[0])
   dispatch(setRevenue(res.data.data));
   dispatch(setTotalRevenue(res.data.totalRevenue));
 };

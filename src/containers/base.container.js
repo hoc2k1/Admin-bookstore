@@ -34,8 +34,8 @@ class BaseContainer extends React.Component {
     this.onClickButton = this.onClickButton.bind(this)
     this.onSearch = this.onSearch.bind(this)
     const queryParams = new URLSearchParams(this.props.location.search);
-    this.state.searchText = queryParams.get('searchText');
-    this.state.searchType = queryParams.get('searchType');
+    this.state.searchText = queryParams.get('searchText') ? decodeURI(queryParams.get('searchText')) : '';
+    this.state.searchType = queryParams.get('searchType') ? decodeURI(queryParams.get('searchType')) : '';
     this.state.page = queryParams.get('page') || 1;
   }
   componentWillMount() {

@@ -28,6 +28,15 @@
   }
 }
 
+.bill-status-button {
+  opacity: 0.6;
+  color: var(--color-theme);
+}
+
+.bill-status-button.active {
+  opacity: 1;
+}
+
 .color-price-after-sale {
   color: var(--color-price-after-sale);
 }

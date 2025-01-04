@@ -200,6 +200,14 @@ export const addressForm = [
 
 export const currency = 'đ'
 
+export const billStatus = {
+  pending: 'pending',
+  wait_accept: 'Chờ xác nhận',
+  shipping: 'Đang vận chuyền',
+  complete: 'Hoàn thành',
+  cancel: "Đã huỷ"
+}
+
 export const inputStatus = {
   normal: 'normal',
   error: 'error',
