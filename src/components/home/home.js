@@ -35,7 +35,7 @@ const Home = (props) => {
   }
   const renderChart = () => { 
     const aggregatedData = props.revenue?.reduce((acc, item) => {
-      const date = new Date(item.date_complete).toLocaleDateString("vi-VN");
+      const date = new Date(item.date_create).toLocaleDateString("vi-VN");
       if (!acc[date]) {
         acc[date] = 0;
       }
