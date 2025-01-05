@@ -20,6 +20,9 @@
   --color-input-disabled: #f7f7fa;
   --color-success: #008000;
 }
+.ReactModal__Overlay {
+  z-index: 999999;
+}
 
 @media (min-width: 768px) {
   :root {
@@ -330,7 +333,9 @@ body {
 .w-200 {
   width: 200%;
 }
-
+.rs-picker-select-menu {
+  z-index: 9999999999 !important;
+}
 @media (min-width: 768px) {
   .icon-button {
     opacity: var(--icon-opacity);

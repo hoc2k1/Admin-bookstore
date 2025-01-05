@@ -77,7 +77,7 @@ const Bills = (props) => {
     if (props.bills?.length > 0) {
       return (
         <div className='w-100 flex-grow-1 d-flex py-md-3 py-2 overflow-auto flex-column justify-content-between'>
-          <div className='content-width w-100 h-full overflow-x-auto'>
+          <div className='content-width w-100 h-100 overflow-x-auto'>
             <div className='h-fit w-200 w-md-150 w-lg-100'>
               {renderHeaderGrid()}
               {props.bills.map((item, index) => {

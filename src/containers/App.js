@@ -12,6 +12,7 @@ import PublishersContainer from "./publishers.container";
 import UsersContainer from "./users.container";
 import LoginContainer from "./login.container";
 import { Toaster } from 'react-hot-toast';
+import 'rsuite/dist/rsuite.min.css';
 class App extends Component {
   render() {
     return (

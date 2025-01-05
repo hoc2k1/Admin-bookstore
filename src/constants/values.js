@@ -1,5 +1,5 @@
-export const URL_BE = 'https://be-bookstore-iota.vercel.app/'
-// export const URL_BE = 'http://localhost:8080/'
+// export const URL_BE = 'https://be-bookstore-iota.vercel.app/'
+export const URL_BE = 'http://localhost:8080/'
 
 export const ERROR_MESSAGE = "Something when wrong!"
 
@@ -87,6 +87,109 @@ export const authorForm = [
     required: true,
     label: 'Tác giả',
     errorMessage: 'Tên không hợp lệ'
+  },
+]
+
+export const productForm = [
+  {
+    inputKey: 'name',
+    type: 'text',
+    placeholder: '',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Tên',
+    errorMessage: 'Tên không hợp lệ'
+  },
+  {
+    inputKey: 'price',
+    type: 'number',
+    placeholder: '',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Giá',
+    errorMessage: 'Giá trị không hợp lệ'
+  },
+  {
+    inputKey: 'available',
+    type: 'picker',
+    placeholder: 'Chọn tình trạng còn hàng',
+    isValidate: true,
+    defaultValue: true,
+    required: true,
+    label: 'Tình trạng còn hàng',
+    errorMessage: ''
+  },
+  {
+    inputKey: 'id_category',
+    type: 'picker',
+    placeholder: 'Chọn thể loại',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Thể loại',
+    errorMessage: ''
+  },
+  {
+    inputKey: 'id_author',
+    type: 'picker',
+    placeholder: 'Chọn tác giả',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Tác giả',
+    errorMessage: ''
+  },
+  {
+    inputKey: 'id_publisher',
+    type: 'picker',
+    placeholder: 'Chọn nhà xuất bản',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Nhà xuất bản',
+    errorMessage: ''
+  },
+  {
+    inputKey: 'img',
+    type: 'images',
+    placeholder: '',
+    isValidate: false,
+    defaultValue: [],
+    required: false,
+    label: 'Ảnh',
+    errorMessage: ''
+  },
+  {
+    inputKey: 'describe',
+    type: 'textarea',
+    placeholder: '',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Mô tả sản phẩm',
+    errorMessage: 'Phải có ít nhất 1 ký tự!'
+  }, 
+  {
+    inputKey: 'count',
+    type: 'number',
+    placeholder: '',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Số lượng',
+    errorMessage: ''
+  },
+  {
+    inputKey: 'sales',
+    type: 'number',
+    placeholder: '',
+    isValidate: true,
+    defaultValue: '',
+    required: true,
+    label: 'Giảm giá (%)',
+    errorMessage: 'Giá trị không hợp lệ'
   },
 ]
 

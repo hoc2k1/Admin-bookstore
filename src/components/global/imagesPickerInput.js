@@ -19,11 +19,27 @@ const ImagePickerInput = ({
 
   const validate = (image, newInputStatus) => {
     if(checkIfImage(image)) {
-      onChange(inputKey, image, newInputStatus)
+      const newImages = value
+      newImages.push(image)
+      onChange(inputKey, newImages, newInputStatus)
     }
     else {
       toast.error("Hãy chọn hình ảnh!")
     }
+  }
+  const removeImage = (image) => {
+    const newImages = value
+    let index = '';
+    if (image.type) {
+      index = newImages.findIndex(item => item.name === image.name);
+    }
+    else {
+      index = newImages.findIndex(item => item == image)
+    }
+    if (index !== -1) {
+      newImages.splice(index, 1);
+    }
+    onChange(inputKey, newImages, true)
   }
   return (
     <div className="d-flex flex-column normal-width-input mt-2">
@@ -42,13 +58,18 @@ const ImagePickerInput = ({
           <span>Chọn ảnh</span>
         </Button>
       </label>
-      {value && (
-        <img 
-          src={value.type ? URL.createObjectURL(value) : value} 
-          alt="Image" 
-          className="image-picker"
-        />
-      )}
+      <div className="d-flex flex-wrap">
+        {value && value.map((item, index) =>
+          <div key={`image-${index}`} className="position-relative h-fit w-fit">
+            <img 
+              src={item.type ? URL.createObjectURL(item) : item} 
+              alt="Image" 
+              className="image-in-grid m-2"
+            />
+            <i className="fa fa-times-circle cursor-pointer position-absolute top-0 right-0" onClick={()=> removeImage(item)}></i>
+          </div>
+        )}
+      </div>
       <span className={`input-message-error ${checkValidate == inputStatus.error ? 'show' : '' }`}>{errorMessage || 'Error message'}</span>
     </div>
   )

@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { inputStatus } from "../../constants/values";
 
-const FloatingInput = ({ inputKey, type, placeholder, onChange, 
+const TextareaInput = ({ inputKey, type, placeholder, onChange, 
   password, isValidate, value, required, label, fieldStatus,
   errorMessage, checkValidate, isDisabled }) => {
   const validate = (text) => {
@@ -21,7 +21,7 @@ const FloatingInput = ({ inputKey, type, placeholder, onChange,
           newInputStatus = text == password ? inputStatus.success : inputStatus.error
           break;
         case 'sales':
-          newInputStatus = parseInt(text) <= 100 && parseInt(text) >= 0 ? inputStatus.success : inputStatus.error
+          newInputStatus = parseInt(text) < 100 && parseInt(text) >= 0 ? inputStatus.success : inputStatus.error
           break;
         case 'phone':
         case 'phoneNumber':
@@ -44,7 +44,7 @@ const FloatingInput = ({ inputKey, type, placeholder, onChange,
   return (
     <div className="d-flex flex-column normal-width-input mt-2">
       {label && (<label className={`${required ? 'required' : ''}`}>{label}</label>)}
-      <input type={type || 'text'}
+      <textarea type={type || 'text'}
         className={`border p-2 ${isDisabled ? 'input-disabled' : ''}`}
         disabled={isDisabled}
         placeholder={placeholder}
@@ -59,4 +59,4 @@ const FloatingInput = ({ inputKey, type, placeholder, onChange,
   )
 }
 
-export default FloatingInput
+export default TextareaInput

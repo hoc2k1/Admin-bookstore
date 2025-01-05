@@ -8,7 +8,7 @@ const Users = (props) => {
     return (
       <div className='content-width mt-md-4 mt-3 d-flex align-items-center gap-2'>
         <span>Tìm kiếm: </span>
-        <div className='border dflex align-items-center w-fit'>
+        <div className='border d-flex align-items-center w-fit'>
           <input 
             type="text"
             className={`p-2 border-0 outline-none`}
@@ -71,7 +71,7 @@ const Users = (props) => {
     if (props.users?.length > 0) {
       return (
         <div className='w-100 flex-grow-1 d-flex py-md-3 py-2 overflow-auto flex-column justify-content-between'>
-          <div className='content-width w-100 h-full overflow-x-auto'>
+          <div className='content-width w-100 h-100 overflow-x-auto'>
             <div className='h-fit w-200 w-md-150 w-lg-100'>
               {renderHeaderGrid()}
               {props.users.map((item, index) => {

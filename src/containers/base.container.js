@@ -40,7 +40,7 @@ class BaseContainer extends React.Component {
   }
   componentWillMount() {
     this.form.map((item) => {
-      this.state.form.values[item.inputKey] = ''
+      this.state.form.values[item.inputKey] = item.defaultValue
       if (item.isValidate) {
         this.state.form.checkValidate[item.inputKey] = inputStatus.normal
       }
@@ -92,7 +92,7 @@ class BaseContainer extends React.Component {
     const newFormState = this.state.form
     this.isEdit = false
     this.form.map((item) => {
-      newFormState.values[item.inputKey] = ''
+      newFormState.values[item.inputKey] = item.defaultValue
       if (item.isValidate) {
         newFormState.checkValidate[item.inputKey] = inputStatus.normal
       }
