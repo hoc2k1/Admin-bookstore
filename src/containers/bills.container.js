@@ -20,6 +20,25 @@ class BillsContainer extends BaseContainer {
     }
     this.props.billActions.getAllBills({status: this.state.searchType, page: this.state.page})
     this.onChangeLayout = this.onChangeLayout.bind(this) 
+    this.updateStatus = this.updateStatus.bind(this)
+    this.billStatus = [
+      {
+        value: billStatus.wait_accept,
+        label: billStatus.wait_accept
+      },
+      {
+        value: billStatus.shipping,
+        label: billStatus.shipping
+      },
+      {
+        value: billStatus.complete,
+        label: billStatus.complete
+      },
+      {
+        value: billStatus.cancel,
+        label: billStatus.cancel
+      },
+    ]
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,6 +55,7 @@ class BillsContainer extends BaseContainer {
     if(nextProps.location.search != this.props.location.search) {
       const queryParams = new URLSearchParams(nextProps.location.search);
       this.state.page = queryParams.get('page') || 1;
+      this.state.searchType = queryParams.get('searchType') || billStatus.wait_accept
       this.props.billActions.getAllBills({status: this.state.searchType, page: this.state.page || 1})
     }
   }
@@ -44,6 +64,22 @@ class BillsContainer extends BaseContainer {
       pathname: this.props.location.pathname,
       search: `?searchType=${nextStatus}`
     })
+  }
+  updateStatus = async (item, status) => {
+    if (status != item.status) {
+      const checkUpdate = await this.props.billActions.updateBill({id: item._id, status: status})
+      if (checkUpdate) {
+        await this.props.billActions.getAllBills({status: this.state.searchType, page: this.state.page || 1})
+      } 
+    }
+  }
+  onRemove = async () => {
+    this.showLoading(true)
+    const checkRemove = await this.props.billActions.deleteBill(this.state.form.values.id)
+    if (checkRemove) {
+      await this.props.billActions.getAllBills({status: this.state.searchType, page: this.state.page || 1})
+      this.setState({ loading: false, showModalDelete: false })
+    } 
   }
   renderContent() {
     return (

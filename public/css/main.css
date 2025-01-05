@@ -21,7 +21,7 @@
   --color-success: #008000;
 }
 .ReactModal__Overlay {
-  z-index: 999999;
+  z-index: 99;
 }
 
 @media (min-width: 768px) {
@@ -334,8 +334,21 @@ body {
   width: 200%;
 }
 .rs-picker-select-menu {
-  z-index: 9999999999 !important;
+  z-index: 100 !important;
 }
+
+textarea {
+  height: 300px;
+}
+
+.text-truncate-multiline {
+  display: -webkit-box; /* Tạo khối flexbox cho dòng */
+  -webkit-box-orient: vertical; /* Đặt hướng dòng dọc */
+  overflow: hidden; /* Ẩn phần nội dung thừa */
+  text-overflow: ellipsis; /* Hiển thị "..." ở cuối */
+  -webkit-line-clamp: 5; /* Số dòng tối đa */
+}
+
 @media (min-width: 768px) {
   .icon-button {
     opacity: var(--icon-opacity);
@@ -350,7 +363,7 @@ body {
 		width: 768px;
 	}
   .content-width {
-    max-width: calc(992px + 2rem);
+    max-width: calc(1024px + 2rem);
     padding-left: 1rem;
     padding-right: 1rem;
   }

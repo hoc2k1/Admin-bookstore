@@ -110,7 +110,7 @@ const Products = (props) => {
           </div>
         </div>
         <div className='col-4 d-flex align-items-center py-md-2 py-1'>
-          <span>{item.describe}</span>
+          <span className='text-truncate-multiline'>{item.describe}</span>
         </div>
         <div className='col-2 d-flex align-items-center py-md-2 py-1'>
           <span>{item.count}</span>

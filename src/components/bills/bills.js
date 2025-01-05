@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { checkNotEmpty } from '../../config/identify'
 import Pagination from '../global/pagination'
-import { billStatus } from '../../constants/values'
+import { billStatus, currency } from '../../constants/values'
+import { InputPicker } from 'rsuite'
 
 const Bills = (props) => {
   const renderHeader = () => {
@@ -33,18 +34,30 @@ const Bills = (props) => {
   }
   const renderHeaderGrid = () => {
     return (
-      <div className='row w-100 mx-auto'>
-        <div className='col-2 secondary-bg d-flex align-items-center py-md-2 py-1'>
+      <div className='row w-md-150 w-200 mx-auto'>
+        <div className='col-1 secondary-bg d-flex align-items-center py-md-2 py-1'>
           <span className='heading-small color-theme'>Họ tên</span>
         </div>
-        <div className='col-5 secondary-bg d-flex align-items-center py-md-2 py-1'>
+        <div className='col-2 secondary-bg d-flex align-items-center py-md-2 py-1'>
           <span className='heading-small color-theme'>Địa chỉ</span>
         </div>
-        <div className='col-2 secondary-bg d-flex align-items-center py-md-2 py-1'>
+        <div className='col-1 secondary-bg d-flex align-items-center py-md-2 py-1'>
           <span className='heading-small color-theme'>Số điện thoại</span>
         </div>
-        <div className='col-2 secondary-bg d-flex align-items-center py-md-2 py-1'>
-          <span className='heading-small color-theme'>Email</span>
+        <div className='col-1 secondary-bg d-flex align-items-center py-md-2 py-1'>
+          <span className='heading-small color-theme'>Phương thức thanh toán</span>
+        </div>
+        <div className='col-3 secondary-bg d-flex align-items-center py-md-2 py-1'>
+          <span className='heading-small color-theme'>Sản phẩm</span>
+        </div>
+        <div className='col-1 secondary-bg d-flex align-items-center py-md-2 py-1'>
+          <span className='heading-small color-theme'>Tổng số tiền</span>
+        </div>
+        <div className='col-1 secondary-bg d-flex align-items-center py-md-2 py-1'>
+          <span className='heading-small color-theme'>Ngày đặt</span>
+        </div>
+        <div className='col-1 secondary-bg d-flex align-items-center py-md-2 py-1'>
+          <span className='heading-small color-theme'>Trạng thái</span>
         </div>
         <div className='col-1 secondary-bg d-flex align-items-center py-md-2 py-1'>
           <span className='heading-small color-theme'>Hành động</span>
@@ -54,18 +67,38 @@ const Bills = (props) => {
   }
   const renderItem = (item) => {
     return (
-      <div className='row border-bottom w-100 mx-auto'>
-        <div className='col-2 d-flex align-items-center py-md-2 py-1'>
-          <span>{`${item.firstName} ${item.lastName}`}</span>
-        </div>
-        <div className='col-5 d-flex align-items-center py-md-2 py-1'>
-          <span></span>
+      <div className='row border-bottom w-md-150 w-200 mx-auto'>
+        <div className='col-1 d-flex align-items-center py-md-2 py-1'>
+          <span>{`${item.name}`}</span>
         </div>
         <div className='col-2 d-flex align-items-center py-md-2 py-1'>
-          <span>{item.phoneNumber}</span>
+          <span>{item.address}</span>
         </div>
-        <div className='col-2 d-flex align-items-center py-md-2 py-1'>
+        <div className='col-1 d-flex align-items-center py-md-2 py-1'>
+          <span>{item.phone}</span>
+        </div>
+        <div className='col-1 d-flex align-items-center py-md-2 py-1'>
+          <span>{item.payment_method}</span>
+        </div>
+        <div className='col-3 d-flex align-items-center py-md-2 py-1'>
           <span>{item.email}</span>
+        </div>
+        <div className='col-1 d-flex align-items-center py-md-2 py-1'>
+          <span>{item.total}<sup>{currency}</sup></span>
+        </div>
+        <div className='col-1 d-flex align-items-center py-md-2 py-1'>
+          <span>{new Date(item.date_create).toLocaleDateString("vi-VN")}</span>
+        </div>
+        <div className='col-1 d-flex align-items-center py-md-2 py-1'>
+          <InputPicker 
+            data={props.parent.billStatus}
+            placeholder={''}
+            defaultValue={item.status}
+            value={item.status}
+            onChange={(value) => props.parent.updateStatus(item, value)}
+            cleanable={false}
+          />
+          {/* <span>{item.status}</span> */}
         </div>
         <div className='col-1 d-flex align-items-center py-md-2 py-1 gap-2 gap-md-3'>
           <i className='fa fa-trash font-size-normal p-2 secondary-bg icon-delete cursor-pointer icon-button' onClick={() => props.parent.onClickRemove(item)}></i>

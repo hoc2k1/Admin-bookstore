@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div className="w-100 h-100">
-        <Toaster position="top-center" toastOptions={{duration: 5000}}/>
+        <Toaster position="top-center" toastOptions={{duration: 5000}} containerStyle={{zIndex: 200}}/>
         <Router>
           <Switch>
             <Route exact path="/" component={HomeContainer} />
