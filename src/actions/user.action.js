@@ -84,6 +84,30 @@ export const login = (data) => async (dispatch, getState) => {
     return true
   }
 }
+
+export const updateRole = ({is_admin, firstName, lastName, email}) => async (dispatch, getState) => {
+  let res;
+  try {
+    res = await axios.post(`${URL_BE}user/updateinfor`, {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      is_admin: is_admin
+    });
+  } catch (err) {
+    toast.error(ERROR_MESSAGE);
+    return false;
+  }
+
+  if (res.data.error) {
+    toast.error(res.data.error);
+    return false;
+  } else {
+    toast.success("Cập nhật vai trò thành công!");
+    return true;
+  }
+}
+
 export const logout = () => (dispatch, getState) => {
   storeConfig.clear()
   dispatch(setLoginFail())

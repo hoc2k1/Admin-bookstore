@@ -16,6 +16,17 @@ class UsersContainer extends BaseContainer {
     this.props.userActions.auth()
     this.props.userActions.getAllUsers({searchText: this.state.searchText, page: this.state.page})
     this.form = userForm
+    this.role = [
+      {
+        value: false,
+        label: 'Không'
+      },
+      {
+        value: true,
+        label: 'Có'
+      }
+    ]
+    this.updateRole = this.updateRole.bind(this)
   }
   onRemove = async () => {
     this.showLoading(true)
@@ -42,6 +53,14 @@ class UsersContainer extends BaseContainer {
       const queryParams = new URLSearchParams(nextProps.location.search);
       this.state.page = queryParams.get('page') || 1;
       this.props.userActions.getAllUsers({searchText: this.state.searchText, page: queryParams.get('page') || 1})
+    }
+  }
+  updateRole = async (item, value) => {
+    if (value != item.is_admin) {
+      const checkUpdate = await this.props.userActions.updateRole({ is_admin: value, firstName: item.firstName, lastName: item.lastName, email: item.email})
+      if (checkUpdate) {
+        await this.props.userActions.getAllUsers({searchText: this.state.searchText, page: this.state.page})
+      } 
     }
   }
   renderContent() {

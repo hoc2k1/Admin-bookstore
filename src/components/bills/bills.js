@@ -98,7 +98,6 @@ const Bills = (props) => {
             onChange={(value) => props.parent.updateStatus(item, value)}
             cleanable={false}
           />
-          {/* <span>{item.status}</span> */}
         </div>
         <div className='col-1 d-flex align-items-center py-md-2 py-1 gap-2 gap-md-3'>
           <i className='fa fa-trash font-size-normal p-2 secondary-bg icon-delete cursor-pointer icon-button' onClick={() => props.parent.onClickRemove(item)}></i>

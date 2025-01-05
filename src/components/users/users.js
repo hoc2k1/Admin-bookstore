@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { checkNotEmpty } from '../../config/identify'
 import Pagination from '../global/pagination'
+import { InputPicker } from 'rsuite'
 
 const Users = (props) => {
   const renderSearch = () => {
@@ -34,10 +35,10 @@ const Users = (props) => {
         <div className='col-3 secondary-bg d-flex align-items-center py-md-2 py-1'>
           <span className='heading-small color-theme'>Tên</span>
         </div>
-        <div className='col-4 secondary-bg d-flex align-items-center py-md-2 py-1'>
+        <div className='col-3 secondary-bg d-flex align-items-center py-md-2 py-1'>
           <span className='heading-small color-theme'>Email</span>
         </div>
-        <div className='col-1 secondary-bg d-flex align-items-center py-md-2 py-1'>
+        <div className='col-2 secondary-bg d-flex align-items-center py-md-2 py-1'>
           <span className='heading-small color-theme'>Là quản lý?</span>
         </div>
         <div className='col-1 secondary-bg d-flex align-items-center py-md-2 py-1'>
@@ -55,11 +56,18 @@ const Users = (props) => {
         <div className='col-3 d-flex align-items-center py-md-2 py-1'>
           <span>{item.lastName}</span>
         </div>
-        <div className='col-4 d-flex align-items-center py-md-2 py-1'>
+        <div className='col-3 d-flex align-items-center py-md-2 py-1'>
           <span>{item.email}</span>
         </div>
-        <div className='col-1 d-flex align-items-center py-md-2 py-1'>
-          <span>{`${item.is_admin ? 'Có' : 'Không'}`}</span>
+        <div className='col-2 d-flex align-items-center py-md-2 py-1'>
+          <InputPicker
+            data={props.parent.role}
+            placeholder={''}
+            defaultValue={item.is_admin}
+            value={item.is_admin}
+            onChange={(value) => props.parent.updateRole(item, value)}
+            cleanable={false}
+          />
         </div>
         <div className='col-1 d-flex align-items-center py-md-2 py-1 gap-2 gap-md-3'>
           <i className='fa fa-trash font-size-normal p-2 secondary-bg icon-delete cursor-pointer icon-button' onClick={() => props.parent.onClickRemove(item)}></i>
