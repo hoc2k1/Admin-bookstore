@@ -47,7 +47,7 @@ const Form = (props) => {
         }
         else if (item.type == 'picker') {
           return (
-            <div className="d-flex flex-column normal-width-input mt-2">
+            <div className="d-flex flex-column normal-width-input mt-2" key={`${index}`}>
             {item.label && (<label className={`${item.required ? 'required' : ''}`}>{item.label}</label>)}
             
             <InputPicker
