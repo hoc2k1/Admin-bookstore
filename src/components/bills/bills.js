@@ -4,6 +4,7 @@ import { checkNotEmpty } from '../../config/identify'
 import Pagination from '../global/pagination'
 import { billStatus, currency } from '../../constants/values'
 import { InputPicker } from 'rsuite'
+import Price from '../global/price'
 
 const Bills = (props) => {
   const renderHeader = () => {
@@ -80,8 +81,29 @@ const Bills = (props) => {
         <div className='col-1 d-flex align-items-center py-md-2 py-1'>
           <span>{item.payment_method}</span>
         </div>
-        <div className='col-3 d-flex align-items-center py-md-2 py-1'>
-          <span>{item.email}</span>
+        <div className='col-3 d-flex align-items-center py-md-2 py-1 flex-column'>
+          {item.products.map((item1, index1) => {
+            let url_image = '/img/placeholder-image.png'
+            if (item1.img && item1.img.length > 0) {
+              url_image = item1.img[0]
+            }
+            return (
+              <div key={`${index1}`} className={`d-flex gap-2 w-100 ${index1 != item.products.length - 1 ? 'border-bottom' : ''}`}>
+                <img className='image-in-grid m-1' src={url_image}></img>
+                <div>  
+                  <div>
+                    <span className='heading p'>{item1.name}</span>
+                  </div>
+                  <div>
+                    <Price price={item1.price} sales={item1.sales}/>
+                  </div>
+                  <div>
+                    <span><span className=''>Số lượng: </span>{item1.count}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          )}
         </div>
         <div className='col-1 d-flex align-items-center py-md-2 py-1'>
           <span>{item.total}<sup>{currency}</sup></span>
