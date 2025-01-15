@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { checkNotEmpty } from '../../config/identify'
 import Pagination from '../global/pagination'
-import { billStatus, currency } from '../../constants/values'
+import { billStatus, currency, packPrice } from '../../constants/values'
 import { InputPicker } from 'rsuite'
 import Price from '../global/price'
 
@@ -94,8 +94,13 @@ const Bills = (props) => {
                   <div>
                     <span className='heading p'>{item1.name}</span>
                   </div>
+                  {item1.is_package && (
+                    <div>
+                      <span>Đóng gói ({packPrice}<sup>{currency}</sup> / 1 sản phẩm)</span>
+                    </div>
+                  )}
                   <div>
-                    <Price price={item1.price} sales={item1.sales}/>
+                    <Price price={item1.price} sales={item1.sales} isPackage={item1.is_package}/>
                   </div>
                   <div>
                     <span><span className=''>Số lượng: </span>{item1.count}</span>

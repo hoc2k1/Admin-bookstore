@@ -3,7 +3,7 @@ export const URL_BE = 'https://be-bookstore-iota.vercel.app/'
 
 
 export const ERROR_MESSAGE = "Something when wrong!"
-
+export const packPrice = 3000;
 export const loginForm = [
   {
     inputKey: 'email',
